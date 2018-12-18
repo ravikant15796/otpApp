@@ -23,11 +23,12 @@
                  <p>{{selectedCont.phoneNumber}}</p>
               </a>
               <br>
-              <button class="btn btn-success">Send Message</button>
+              <!-- routerLink="sendsms" -->
+              <a  (click)="smsSend()"><button class="btn btn-success">Send Message</button></a>
           </div>
-          <div class="col-md-7">
+          <div class="col-md-5">
               <a class="list-group-item" >
-                  <p>mess</p>
+                  <p >{{selectedCont.message}}</p>
               </a>
           </div>
           </div>

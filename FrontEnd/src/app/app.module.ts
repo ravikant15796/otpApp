@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { ContactdetailComponent } from './contactdetail/contactdetail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.modules';
+import { SendsmsComponent } from './sendsms/sendsms.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,12 +18,14 @@ import { AppRoutingModule } from './app-routing.modules';
     AppComponent,
     GetcontactComponent,
     HeaderComponent,
-    ContactdetailComponent
+    ContactdetailComponent,
+    SendsmsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
     
   ],

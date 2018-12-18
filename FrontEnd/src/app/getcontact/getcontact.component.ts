@@ -24,7 +24,8 @@ export class GetcontactComponent implements OnInit {
   details(i,j){
     this.select = true;
   this.selectedCont = i ;
-  console.log(i);
   }
-
+  smsSend(){
+    this.contactService.sendSms(this.selectedCont._id)
+  }
 }

@@ -11,7 +11,7 @@ var authToken = 'fdb88cbaeb75271f7beee1c0fd3b6a99';
 var client = new twilio(accountSid, authToken);  
 
 var app = express();
-
+app.use(bodyparser.json());
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -43,20 +43,27 @@ app.post('/addcontact',(req,res)=>{
     
 });
 
-app.get('/contacts/:_id',(req,res)=>{
+app.get('/contacts/id',(req,res)=>{
     var msg = 'Hi Your OTP is :' + Math.floor(1000 + Math.random() * 900000);
-    client.messages.create({
-        body: msg,
-        to: '+919785948208',  
-        from: '+18564548123' 
-    }).then((message) => {
-        res.send(client(message).fetch())
-    });
+    // client.messages.create({
+    //     body: msg,
+    //     to: '+919785948208',  
+    //     from: '+18564548123' 
+    // }).then((message) => {
+    //     res.send(client(message).fetch())
+    // });
 
-  User.findOneAndUpdate({_id:req.params._id}, {$set:{message:msg}}).then((user)=>{
+//   User.find({_id:req.params._id}, {$set:{message:msg}}).then((user)=>{
            
-       res.send(user);
-     });
+//        res.send(user);
+//      });
+
+     User.update({_id:req.params._id}, {$push:{
+          message : msg
+         }}).then((user)=>{
+           
+        res.send(user);
+      });
 })
 
 app.use(cors());
