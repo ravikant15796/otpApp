@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +12,9 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^3.4.0",
     "cors": "^2.8.5",
+    "free-mobile-sms-api": "^1.0.4",
     "mongoose": "^5.4.0",
+    "nexmo": "^2.4.0",
     "twilio": "^3.25.0"
   }
 }

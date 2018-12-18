@@ -14,8 +14,4 @@ export class SendsmsComponent implements OnInit {
     
   }
 
-  // sendSms(id){
-  //   this.service.sendSms(id);
-  // }
-
 }

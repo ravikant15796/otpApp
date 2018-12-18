@@ -20,11 +20,11 @@ export class ContactService {
     addContact(newContact : Contact){
     return this.http.post("http://localhost:4000/addcontact" , newContact).pipe(map(res=>res.json()));
    }   
-     sendSms(id){
-       var url = `http://localhost:4000/contacts/${id}`
-       //console.log(typeof('5c17cfea360dd704cc902316'));
-      return this.ht.get("http://localhost:4000/contacts/5c17e767e6134e06509af0d9").pipe(map(res =>res.json()));
-     }
+     sendSms(id:string){
+       var url = "http://localhost:4000/contacts/"+id ;
+       location.reload();
+       return this.http.get(url).pipe();
+      }
    getDetails(selected , index){
      this.selectedContact = selected,
      this.index = index

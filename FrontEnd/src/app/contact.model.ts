@@ -9,7 +9,6 @@ export class Contact{
     this.firstName = fn;
     this.lastName = ln ;
     this.phoneNumber = phn;
-    
     this.message = []
    }
 }

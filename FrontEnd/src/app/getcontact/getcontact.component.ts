@@ -19,6 +19,7 @@ export class GetcontactComponent implements OnInit {
     this.contactService.getContacts().subscribe((contact:Contact)=>{
       this.contact = contact
     })
+    
   }
 
   details(i,j){
@@ -26,6 +27,7 @@ export class GetcontactComponent implements OnInit {
   this.selectedCont = i ;
   }
   smsSend(){
-    this.contactService.sendSms(this.selectedCont._id)
+    this.contactService.sendSms(this.selectedCont['_id']).subscribe();
+    this.ngOnInit();
   }
 }

@@ -13,15 +13,13 @@ import {Form, NgForm} from '@angular/forms';
 export class ContactdetailComponent implements OnInit {
   @ViewChild('f') slForm : NgForm;
  constructor(private contactService : ContactService) { }
-  
   ngOnInit() {
    
     }
-  
     onSubmit(form:NgForm){
       const value = form.value;
       const newContact =  new Contact(value.firstName , value.lastName , value.phoneNumber);
-      console.log(value.firstName);
       this.contactService.addContact(newContact).subscribe();
+      location.reload();
     } 
 }
