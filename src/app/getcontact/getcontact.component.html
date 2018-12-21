@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="col-md-7">
+      <div class="row">
+          <div class="col-xs-8">
+            <div class="row">
+              <h3>List of Saved Contacts</h3>
+            </div>
+            <a class="list-group-item" *ngFor ="let i of contact; let j = index" (click)="details(i,j)" >
+              <p> {{i.firstName}} {{i.lastName}} <span class="pull-right" ></span></p>
+            </a>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-5" >
+      <h3>Selected Contact Details</h3>
+      <p *ngIf="select===false">Select contact to send message</p>
+      <div class="row" *ngIf="select===true">
+          <div class="col-md-5" >
+             
+              <a class="list-group-item" >
+                 <p>{{selectedCont.firstName}} {{selectedCont.lastName}}</p>
+                 <p>{{selectedCont.phoneNumber}}</p>
+              </a>
+              <br>
+              <!-- routerLink="sendsms" -->
+              <a  (click)="smsSend()"><button class="btn btn-success">Send Message</button></a>
+          </div>
+          <div class="col-md-6">
+              <a class="list-group-item" >
+                  <p >{{selectedCont.message}}</p>
+              </a>
+          </div>
+          </div>
+  </div>
+    
+</div>

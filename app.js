@@ -25,6 +25,10 @@ app.use(function(req,res,next){
 
   var contacts = [];
 
+  app.get('/',(req,res)=>{
+      res.send('Hi App is working Now');
+  })
+
 app.get('/contacts',(req,res)=>{
   User.find().then((doc)=>{
       res.send(doc);
@@ -32,7 +36,7 @@ app.get('/contacts',(req,res)=>{
       res.status(400).send();
   })
 })
-    
+
 app.post('/addcontact',(req,res)=>{
    var newUser = new User({
         firstName : req.body.firstName,
