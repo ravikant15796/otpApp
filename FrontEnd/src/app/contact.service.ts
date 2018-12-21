@@ -12,16 +12,16 @@ export class ContactService {
      selectedContact : Contact;
      index : number;
      container = [];
-     
+
     constructor(private http : Http,private ht : HttpClient) { }
      getContacts(){
-      return this.http.get("http://localhost:4000/contacts").pipe(map(res =>res.json()));
+      return this.http.get("contacts").pipe(map(res =>res.json()));
   }
     addContact(newContact : Contact){
-    return this.http.post("http://localhost:4000/addcontact" , newContact).pipe(map(res=>res.json()));
-   }   
+    return this.http.post("addcontact" , newContact).pipe(map(res=>res.json()));
+   }
      sendSms(id:string){
-       var url = "http://localhost:4000/contacts/"+id ;
+       var url = "contacts/"+id ;
        location.reload();
        return this.http.get(url).pipe();
       }
@@ -30,5 +30,5 @@ export class ContactService {
      this.index = index
      this.container.push(this.selectedContact);
    }
-    
+
   }
