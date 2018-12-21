@@ -5,6 +5,7 @@ var bodyparser = require('body-parser');
 var twilio = require('twilio');
 var cors = require("cors");
 const port = process.env.PORT || 4000
+var path = require('path');
 
 var accountSid = 'AC4f743c19ce92cfac01d51a12993bb1a4'; 
 var authToken = 'fdb88cbaeb75271f7beee1c0fd3b6a99';
@@ -16,6 +17,8 @@ const Nexmo = require('nexmo')
 
 
 var app = express();
+app.use(express.static(path.join(__dirname,'public')));
+
 app.use(bodyparser.json());
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -25,6 +28,9 @@ app.use(function(req,res,next){
 
   var contacts = [];
 
+  app.get('*',(req,res)=>{
+      res.sendFile(path.join(__dirname,'public/index.html'));
+  })
   app.get('/',(req,res)=>{
       res.send('Hi App is working Now');
   })
