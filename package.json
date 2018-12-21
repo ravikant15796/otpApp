@@ -2,7 +2,7 @@
   "name": "otpapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -17,5 +17,8 @@
     "mongoose": "^5.4.0",
     "nexmo": "^2.4.0",
     "twilio": "^3.25.0"
+  },
+  "engines": {
+    "node": "8.11.3"
   }
 }

@@ -32,7 +32,7 @@ app.get('/contacts',(req,res)=>{
       res.status(400).send();
   })
 })
-
+    
 app.post('/addcontact',(req,res)=>{
    var newUser = new User({
         firstName : req.body.firstName,
