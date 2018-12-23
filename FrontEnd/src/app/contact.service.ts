@@ -15,13 +15,13 @@ export class ContactService {
 
     constructor(private http : Http,private ht : HttpClient) { }
      getContacts(){
-      return this.http.get("contacts").pipe(map(res =>res.json()));
+      return this.http.get("http://localhost:4000/api/contacts").pipe(map(res =>res.json()));
   }
     addContact(newContact : Contact){
-    return this.http.post("addcontact" , newContact).pipe(map(res=>res.json()));
+    return this.http.post("http://localhost:4000/api/addcontact" , newContact).pipe(map(res=>res.json()));
    }
      sendSms(id:string){
-       var url = "contacts/"+id ;
+       var url = "http://localhost:4000/api/contacts/"+id ;
        location.reload();
        return this.http.get(url).pipe();
       }

@@ -256,13 +256,13 @@ var ContactService = /** @class */ (function () {
         this.container = [];
     }
     ContactService.prototype.getContacts = function () {
-        return this.http.get("contacts").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+        return this.http.get("http://localhost:4000/contacts").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     ContactService.prototype.addContact = function (newContact) {
-        return this.http.post("addcontact", newContact).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+        return this.http.post("http://localhost:4000/addcontact", newContact).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     ContactService.prototype.sendSms = function (id) {
-        var url = "contacts/" + id;
+        var url = "http://localhost:4000/contacts/" + id;
         location.reload();
         return this.http.get(url).pipe();
     };
