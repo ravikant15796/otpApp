@@ -18,9 +18,9 @@
     app.use(cors());
     app.use(bodyparser.json());
 
-    app.use(express.static(path.join(__dirname + '/FrontEnd/dist/client')));
+    app.use(express.static(path.join(__dirname + '/public')));
 
-
+  console.log(path.join(__dirname + '/public'));
     
 app.get('/api/contacts',(req,res,next)=>{
         User.find().then((doc)=>{
@@ -83,10 +83,10 @@ app.post('/api/addcontact',(req,res)=>{
     })
 
     app.use('*',(req,res)=>{
-        res.sendFile(path.join(__dirname+'/FrontEnd/dist/client/index.html'));
+        res.sendFile(path.join(__dirname+'/public/index.html'));
    }) 
-
-
+     console.log(path.join(__dirname+'/public/index.html')) ;
+  
     app.use(function(req,res,next){
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
