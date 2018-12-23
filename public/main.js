@@ -150,14 +150,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_modules__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.modules */ "./src/app/app-routing.modules.ts");
 /* harmony import */ var _sendsms_sendsms_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sendsms/sendsms.component */ "./src/app/sendsms/sendsms.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _play_play_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./play/play.component */ "./src/app/play/play.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -180,7 +178,6 @@ var AppModule = /** @class */ (function () {
                 _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"],
                 _contactdetail_contactdetail_component__WEBPACK_IMPORTED_MODULE_6__["ContactdetailComponent"],
                 _sendsms_sendsms_component__WEBPACK_IMPORTED_MODULE_9__["SendsmsComponent"],
-                _play_play_component__WEBPACK_IMPORTED_MODULE_11__["PlayComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -530,69 +527,6 @@ var HeaderComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], HeaderComponent);
     return HeaderComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/play/play.component.css":
-/*!*****************************************!*\
-  !*** ./src/app/play/play.component.css ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/play/play.component.html":
-/*!******************************************!*\
-  !*** ./src/app/play/play.component.html ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<input id=\"name\" name=\"name\" class=\"form-control\"\n      required minlength=\"4\" appForbiddenName=\"bob\"\n      [(ngModel)]=\"hero.name\" #name=\"ngModel\" >\n\n<div *ngIf=\"name.invalid && (name.dirty || name.touched)\"\n    class=\"alert alert-danger\">\n\n  <div *ngIf=\"name.errors.required\">\n    Name is required.\n  </div>\n  <div *ngIf=\"name.errors.minlength\">\n    Name must be at least 4 characters long.\n  </div>\n  <div *ngIf=\"name.errors.forbiddenName\">\n    Name cannot be Bob.\n  </div>\n\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/play/play.component.ts":
-/*!****************************************!*\
-  !*** ./src/app/play/play.component.ts ***!
-  \****************************************/
-/*! exports provided: PlayComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayComponent", function() { return PlayComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PlayComponent = /** @class */ (function () {
-    function PlayComponent() {
-    }
-    PlayComponent.prototype.ngOnInit = function () {
-    };
-    PlayComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-play',
-            template: __webpack_require__(/*! ./play.component.html */ "./src/app/play/play.component.html"),
-            styles: [__webpack_require__(/*! ./play.component.css */ "./src/app/play/play.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], PlayComponent);
-    return PlayComponent;
 }());
 
 
