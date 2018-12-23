@@ -11,7 +11,8 @@ import { ContactService } from '../contact.service';
 })
 export class GetcontactComponent implements OnInit {
   contact : Contact;
-  selectedCont = Contact;
+  selectedCont = ' '+Contact;
+  
   private subscribe : Subscription;
   constructor(private contactService : ContactService) { }
   public select = false;

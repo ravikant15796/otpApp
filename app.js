@@ -20,8 +20,7 @@
 
     app.use(express.static(path.join(__dirname + '/public')));
 
-  console.log(path.join(__dirname + '/public'));
-    
+  
 app.get('/api/contacts',(req,res,next)=>{
         User.find().then((doc)=>{
         res.send(doc);
@@ -30,9 +29,7 @@ app.get('/api/contacts',(req,res,next)=>{
         res.status(400).send();
     })
     })
-  
-
-app.post('/api/addcontact',(req,res)=>{
+  app.post('/api/addcontact',(req,res)=>{
        var newUser = new User({
             firstName : req.body.firstName,
             lastName : req.body.lastName,
@@ -48,7 +45,7 @@ app.post('/api/addcontact',(req,res)=>{
     });
 
     app.get('/api/contacts/:id',(req,res)=>{
-        var msg = 'Hi Your OTP is :' + Math.floor(1000 + Math.random() * 900000);
+        var msg = 'Hi Your OTP is  :  ' + Math.floor(1000 + Math.random() * 900000);
         // client.messages.create({
         //     body: msg,
         //     to: '+919785948208',  
@@ -64,7 +61,7 @@ app.post('/api/addcontact',(req,res)=>{
           })
         
           const from = 'Nexmo'
-          const to = '919620390463'
+          const to = '919785948208'
          // const text = 'Hello from Nexmo'
         
           nexmo.message.sendSms(from, to, msg)
@@ -73,11 +70,10 @@ app.post('/api/addcontact',(req,res)=>{
             
     //   res.send(user);
     //      });
-    console.log('Msg Sent');
+    
     User.update({_id:req.params.id}, {$push:{
             message : msg
             }}).then((user)=>{
-            
             res.send(user);
         });
     })
@@ -85,17 +81,14 @@ app.post('/api/addcontact',(req,res)=>{
     app.use('*',(req,res)=>{
         res.sendFile(path.join(__dirname+'/public/index.html'));
    }) 
-     console.log(path.join(__dirname+'/public/index.html')) ;
-  
-    app.use(function(req,res,next){
+    
+   app.use(function(req,res,next){
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     });
 
-
-
-    app.listen(port,(err,success)=>{
+app.listen(port,(err,success)=>{
         if(err){
             console.log(`There is An Error on listening on ${port}`);
         }

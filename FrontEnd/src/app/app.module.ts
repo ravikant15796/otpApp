@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.modules';
 import { SendsmsComponent } from './sendsms/sendsms.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PlayComponent } from './play/play.component';
 
 
 
@@ -19,14 +20,16 @@ import { HttpClientModule } from '@angular/common/http';
     GetcontactComponent,
     HeaderComponent,
     ContactdetailComponent,
-    SendsmsComponent
+    SendsmsComponent,
+    PlayComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

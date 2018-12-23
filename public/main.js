@@ -150,12 +150,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_modules__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.modules */ "./src/app/app-routing.modules.ts");
 /* harmony import */ var _sendsms_sendsms_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sendsms/sendsms.component */ "./src/app/sendsms/sendsms.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _play_play_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./play/play.component */ "./src/app/play/play.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -177,14 +179,16 @@ var AppModule = /** @class */ (function () {
                 _getcontact_getcontact_component__WEBPACK_IMPORTED_MODULE_4__["GetcontactComponent"],
                 _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"],
                 _contactdetail_contactdetail_component__WEBPACK_IMPORTED_MODULE_6__["ContactdetailComponent"],
-                _sendsms_sendsms_component__WEBPACK_IMPORTED_MODULE_9__["SendsmsComponent"]
+                _sendsms_sendsms_component__WEBPACK_IMPORTED_MODULE_9__["SendsmsComponent"],
+                _play_play_component__WEBPACK_IMPORTED_MODULE_11__["PlayComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_http__WEBPACK_IMPORTED_MODULE_2__["HttpModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
-                _app_routing_modules__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"]
+                _app_routing_modules__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ReactiveFormsModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -302,7 +306,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n        <div class=\"row\" class=\"form-group\">\n                <div class=\"col-xs-4\">\n                   <form (ngSubmit)=\"onSubmit(f)\" #f=\"ngForm\">\n                    <div class=\"row\">\n                            <label for=\"firstName\">First Name</label>\n                            <input type=\"text\" class=\"form-control\" name=\"firstName\"\n                            ngModel\n                            >\n                    </div>\n                    <div class=\"row\">\n                            <label for=\"lastName\">Last Name</label>\n                            <input type=\"text\" class=\"form-control\" \n                            required minlength=\"4\"\n                            name=\"lastName\"\n                            ngModel\n                            >\n                    </div>\n                    <div class=\"row\">\n                            <label for=\"lastName\">Phone Number</label>\n                            <input type=\"text\" class=\"form-control\" \n                            name=\"phoneNumber\"\n                            ngModel\n                            >\n                    </div>\n                    <hr>\n                    <div class=\"row\">\n                        <button class=\"btn btn-success\" type=\"submit\">Submit</button>\n                    </div>\n\n                   </form>\n                </div>\n            </div>\n</div>"
+module.exports = "    <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-6 offset-md-3\">\n                  \n                    <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\n                        <div class=\"form-group\">\n                            <label>First Name</label>\n                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                <div *ngIf=\"f.firstName.errors.required\">Please enter valid First Name</div>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <label>Last Name</label>\n                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                             <div *ngIf=\"f.lastName.errors.required\">Please enter valid Last Name</div>\n                            </div>\n                        </div>\n                       \n                        <div class=\"form-group\">\n                            <label>Phone</label>\n                            <input type=\"phone\" formControlName=\"phone\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.phone.errors }\" />\n                            <div *ngIf=\"submitted && f.phone.errors\" class=\"invalid-feedback\">\n                              <div *ngIf=\"f.phone.errors\">Please enter valid phone </div>\n                                \n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <button [disabled]=\"loading\" class=\"btn btn-primary\">Register</button>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n   \n    "
 
 /***/ }),
 
@@ -334,28 +338,52 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var ContactdetailComponent = /** @class */ (function () {
-    function ContactdetailComponent(contactService) {
+    function ContactdetailComponent(contactService, formBuilder) {
         this.contactService = contactService;
+        this.formBuilder = formBuilder;
+        this.submitted = false;
     }
     ContactdetailComponent.prototype.ngOnInit = function () {
+        this.registerForm = this.formBuilder.group({
+            firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            lastName: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].compose([
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+            ])),
+            phone: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].compose([
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'),
+            ])),
+        });
     };
-    ContactdetailComponent.prototype.onSubmit = function (form) {
-        var value = form.value;
-        var newContact = new _contact_model__WEBPACK_IMPORTED_MODULE_2__["Contact"](value.firstName, value.lastName, value.phoneNumber);
+    Object.defineProperty(ContactdetailComponent.prototype, "f", {
+        // onSubmit(form:NgForm){
+        //   const value = form.value;
+        //   const newContact =  new Contact(value.firstName , value.lastName , value.phoneNumber);
+        //   this.contactService.addContact(newContact).subscribe();
+        //   location.reload();
+        // } 
+        get: function () { return this.registerForm.controls; },
+        enumerable: true,
+        configurable: true
+    });
+    ContactdetailComponent.prototype.onSubmit = function () {
+        this.submitted = true;
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            console.log(newContact);
+            return;
+        }
+        var newContact = new _contact_model__WEBPACK_IMPORTED_MODULE_2__["Contact"](this.registerForm.value.firstName, this.registerForm.value.lastName, this.registerForm.value.phone);
         this.contactService.addContact(newContact).subscribe();
         location.reload();
     };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('f'),
-        __metadata("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"])
-    ], ContactdetailComponent.prototype, "slForm", void 0);
     ContactdetailComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-contactdetail',
             template: __webpack_require__(/*! ./contactdetail.component.html */ "./src/app/contactdetail/contactdetail.component.html"),
             styles: [__webpack_require__(/*! ./contactdetail.component.css */ "./src/app/contactdetail/contactdetail.component.css")]
         }),
-        __metadata("design:paramtypes", [_contact_service__WEBPACK_IMPORTED_MODULE_1__["ContactService"]])
+        __metadata("design:paramtypes", [_contact_service__WEBPACK_IMPORTED_MODULE_1__["ContactService"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])
     ], ContactdetailComponent);
     return ContactdetailComponent;
 }());
@@ -382,7 +410,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"col-md-7\">\n      <div class=\"row\">\n          <div class=\"col-xs-8\">\n            <div class=\"row\">\n              <h3>List of Saved Contact</h3>\n            </div>\n            <a class=\"list-group-item\" *ngFor =\"let i of contact; let j = index\" (click)=\"details(i,j)\" >\n              <p> {{i.firstName}} {{i.lastName}} <span class=\"pull-right\" ></span></p>\n            </a>\n          </div>\n        </div>\n    </div>\n\n    <div class=\"col-md-5\" >\n      <h3>Selected Contact Details</h3>\n      <p *ngIf=\"select===false\">Select contact to send message</p>\n      <div class=\"row\" *ngIf=\"select===true\">\n          <div class=\"col-md-5\" >\n             \n              <a class=\"list-group-item\" >\n                 <p>{{selectedCont.firstName}} {{selectedCont.lastName}}</p>\n                 <p>{{selectedCont.phoneNumber}}</p>\n              </a>\n              <br>\n              <!-- routerLink=\"sendsms\" -->\n              <a  (click)=\"smsSend()\"><button class=\"btn btn-success\">Send Message</button></a>\n          </div>\n          <div class=\"col-md-6\">\n              <a class=\"list-group-item\" >\n                  <p >{{selectedCont.message}}</p>\n              </a>\n          </div>\n          </div>\n  </div>\n    \n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"col-md-7\">\n      <div class=\"row\">\n          <div class=\"col-xs-8\">\n            <div class=\"row\">\n              <h3>List of Saved Contact</h3>\n            </div>\n            <a class=\"list-group-item\" *ngFor =\"let i of contact; let j = index\" (click)=\"details(i,j)\" >\n              <p> {{i.firstName}} {{i.lastName}} <span class=\"pull-right\" ></span></p>\n            </a>\n          </div>\n        </div>\n    </div>\n\n    <div class=\"col-md-5\" >\n      <h3>Selected Contact Details</h3>\n      <p *ngIf=\"select===false\">Select contact to send message</p>\n      <div class=\"row\" *ngIf=\"select===true\">\n          <div class=\"col-md-5\" >\n             \n              <a class=\"list-group-item\" >\n                 <p>{{selectedCont.firstName}} {{selectedCont.lastName}}</p>\n                 <p>{{selectedCont.phoneNumber}}</p>\n              </a>\n              <br>\n              <!-- routerLink=\"sendsms\" -->\n              <a  (click)=\"smsSend()\"><button class=\"btn btn-success\">Send Message</button></a>\n          </div>\n          <div class=\"col-md-6\">\n              <a class=\"list-group-item\" >\n                  <p >{{selectedCont.message }} </p>\n              </a>\n          </div>\n          </div>\n  </div>\n    \n</div>\n"
 
 /***/ }),
 
@@ -414,7 +442,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var GetcontactComponent = /** @class */ (function () {
     function GetcontactComponent(contactService) {
         this.contactService = contactService;
-        this.selectedCont = _contact_model__WEBPACK_IMPORTED_MODULE_1__["Contact"];
+        this.selectedCont = ' ' + _contact_model__WEBPACK_IMPORTED_MODULE_1__["Contact"];
         this.select = false;
     }
     GetcontactComponent.prototype.ngOnInit = function () {
@@ -503,6 +531,69 @@ var HeaderComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], HeaderComponent);
     return HeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/play/play.component.css":
+/*!*****************************************!*\
+  !*** ./src/app/play/play.component.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/play/play.component.html":
+/*!******************************************!*\
+  !*** ./src/app/play/play.component.html ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<input id=\"name\" name=\"name\" class=\"form-control\"\n      required minlength=\"4\" appForbiddenName=\"bob\"\n      [(ngModel)]=\"hero.name\" #name=\"ngModel\" >\n\n<div *ngIf=\"name.invalid && (name.dirty || name.touched)\"\n    class=\"alert alert-danger\">\n\n  <div *ngIf=\"name.errors.required\">\n    Name is required.\n  </div>\n  <div *ngIf=\"name.errors.minlength\">\n    Name must be at least 4 characters long.\n  </div>\n  <div *ngIf=\"name.errors.forbiddenName\">\n    Name cannot be Bob.\n  </div>\n\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/play/play.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/play/play.component.ts ***!
+  \****************************************/
+/*! exports provided: PlayComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayComponent", function() { return PlayComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PlayComponent = /** @class */ (function () {
+    function PlayComponent() {
+    }
+    PlayComponent.prototype.ngOnInit = function () {
+    };
+    PlayComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-play',
+            template: __webpack_require__(/*! ./play.component.html */ "./src/app/play/play.component.html"),
+            styles: [__webpack_require__(/*! ./play.component.css */ "./src/app/play/play.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PlayComponent);
+    return PlayComponent;
 }());
 
 
