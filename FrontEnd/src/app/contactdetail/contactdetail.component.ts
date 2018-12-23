@@ -46,8 +46,7 @@ export class ContactdetailComponent implements OnInit {
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
-          console.log(newContact);
-            return;
+          return;
         }
       var newContact =  new Contact(this.registerForm.value.firstName,this.registerForm.value.lastName,this.registerForm.value.phone);
       

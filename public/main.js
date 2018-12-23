@@ -370,7 +370,6 @@ var ContactdetailComponent = /** @class */ (function () {
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
-            console.log(newContact);
             return;
         }
         var newContact = new _contact_model__WEBPACK_IMPORTED_MODULE_2__["Contact"](this.registerForm.value.firstName, this.registerForm.value.lastName, this.registerForm.value.phone);

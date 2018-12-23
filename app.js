@@ -61,7 +61,7 @@ app.get('/api/contacts',(req,res,next)=>{
           })
         
           const from = 'Nexmo'
-          const to = '919785948208'
+          const to = '919971792703'
          // const text = 'Hello from Nexmo'
         
           nexmo.message.sendSms(from, to, msg)
